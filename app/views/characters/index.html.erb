@@ -1,0 +1,26 @@
+<h1>Character Name</h1>
+<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=hulk&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0]["name"] %>
+
+<br>
+
+<h2>Bio</h2>
+<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=hulk&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0]["description"] %>
+
+<h2>Pic</h2>
+
+<%= image_tag(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=hulk&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0]["thumbnail"]["path"].to_s + ".jpg") %>
+
+<br>
+
+
+<h2>This Month's Comics</h2>
+<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/1009351/comics?format=comic&formatType=comic&noVariants=true&dateDescriptor=thisMonth&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
+
+<p>
+
+<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=hulk&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
+
+
+<!-- drop down menu here -->
+<!-- submit button here -->
+<!-- character bio here -->
