@@ -1,25 +1,23 @@
-<%= select(:character, :hero, Character::HEROES) %>
+<%= form_tag characters_path, method: :get do %>
+  <%= select_tag(:heroes, options_from_collection_for_select(@characters, :id, :character_name), selected: :character_name) %>
+  <%= submit_tag("Select") %>
+<% end %>
 
-<h1>Character Name</h1>
-<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=Spider-Man&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0]["name"] %>
+<% unless @character == nil %>
+  <h1>Character Name</h1>
+  <%= @character %>
+  <br>
+  <h2>Bio</h2>
+  <%= character_bio %>
+  <br>
+  <h2>Pic</h2>
+  <%= character_image %>
+  <br>
+  <h2>This Month's Comics</h2>
+  http://gateway.marvel.com:80/v1/public/characters/1009351/comics?orderBy=onsaleDate&limit=5&apikey=9a8cd61ee9a96db5770cc5097a094f75
+  <%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{HTTParty.get(character_id_number)["data"]["results"][0]["id"]}/comics?orderBy=onsaleDate&limit=5&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
+  <p>
+  <%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character}&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
+<% end %>
 
-<br>
-
-<h2>Bio</h2>
-<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=doctor%20doom&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0]["description"] %>
-
-<h2>Pic</h2>
-
-<%= image_tag(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=doctor%20doom&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0]["thumbnail"]["path"].to_s + ".jpg") %>
-
-<br>
-
-<h2>This Month's Comics</h2>
-<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/1009351/comics?format=comic&formatType=comic&noVariants=true&dateDescriptor=thisMonth&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
-
-<p>
-<%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=hulk&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
-
-<!-- drop down menu here -->
-<!-- submit button here -->
-<!-- character bio here -->
+<%= HTTParty.get(character_id_number)["data"]["results"][0]["id"] %>

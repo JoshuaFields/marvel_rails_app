@@ -20,4 +20,22 @@ module ApplicationHelper
     @timestamp = "#{Time.now.to_i}"
   end
 
+  def character_id_number
+    @character_id_number = "http://gateway.marvel.com:80/v1/public/characters?"\
+    "name=#{@character}&ts=#{timestamp}&apikey="\
+    "#{public_key}&hash=#{hash}"
+  end
+
+  def character_bio
+    @character_bio = HTTParty.get("http://gateway.marvel.com:80/v1/public/"\
+    "characters?name=#{@character}&ts=#{timestamp}&apikey=#{public_key}"\
+    "&hash=#{hash}")["data"]["results"][0]["description"]
+  end
+
+  def character_image
+    @character_image = image_tag(HTTParty.get("http://gateway.marvel.com:80/v1/"\
+    "public/characters?name=#{@character}&ts=#{timestamp}&apikey=#{public_key}&"\
+    "hash=#{hash}")["data"]["results"][0]["thumbnail"]["path"].to_s + ".jpg")
+  end
+
 end
