@@ -1,23 +1,17 @@
-<%= form_tag characters_path, method: :get do %>
-  <%= select_tag(:heroes, options_from_collection_for_select(@characters, :id, :character_name), selected: :character_name) %>
-  <%= submit_tag("Select") %>
-<% end %>
+<div class="row main-row">
+  <div class="eleven columns">
 
-<% unless @character == nil %>
-  <h1>Character Name</h1>
-  <%= @character %>
-  <br>
-  <h2>Bio</h2>
-  <%= character_bio %>
-  <br>
-  <h2>Pic</h2>
-  <%= character_image %>
-  <br>
-  <h2>This Month's Comics</h2>
-  http://gateway.marvel.com:80/v1/public/characters/1009351/comics?orderBy=onsaleDate&limit=5&apikey=9a8cd61ee9a96db5770cc5097a094f75
-  <%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{HTTParty.get(character_id_number)["data"]["results"][0]["id"]}/comics?orderBy=onsaleDate&limit=5&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
-  <p>
-  <%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character}&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}") %>
-<% end %>
+    <% unless @character == nil %>
+      <h1><%= @character %></h1>
+      <h5><%= character_bio %></h5>
+      <br>
+      <%= character_image %>
+      <br>
+      <h2>This Month's Comics</h2>
 
-<%= HTTParty.get(character_id_number)["data"]["results"][0]["id"] %>
+      <p>
+
+      <%= character_id_number %>
+    <% end %>
+  </div>
+</div>

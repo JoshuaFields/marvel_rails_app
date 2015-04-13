@@ -1,0 +1,9 @@
+<div class="field">
+  <div class="picker">
+    <%= form_tag characters_path, method: :get do %>
+      <%= select_tag(:heroes, options_from_collection_for_select(@characters.order(:character_name),
+        :id, :character_name), selected: :character_name,
+        include_blank: 'Select', :onchange => "this.form.submit();") %>
+    <% end %>
+  </div>
+</div>

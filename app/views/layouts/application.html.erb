@@ -6,12 +6,31 @@
   </title>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag :modernizr %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="row navbar pretty" id="nav1" gumby-fixed="top">
+    <a class="toggle" gumby-trigger="#nav1 > ul" href="#"><i class="icon-menu"></i></a>
+    <ul class="six columns">
+      <li>
+        <%= link_to "Home", characters_path %>
+      </li>
+    <ul class="six column">
+      <li>
+        <a href="#" class="hero-list">Heroes and Villains</a>
+        <div class="dropdown">
+          <% Character.all.order(:character_name).each do |hero| %>
+            <ul>
+              <li><a href="/characters?utf8=✓&heroes=<%= hero.id %>"><%= hero.character_name %></a></li>
+            </ul>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

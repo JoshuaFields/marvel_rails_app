@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'sass-rails', '~> 5.0'
 gem 'compass'
 gem 'modular-scale'
+gem 'gumby-framework'
+gem 'modernizr-rails'
 
 ## The Essentials ##
 gem 'json'
@@ -21,6 +23,5 @@ gem 'jbuilder', '~> 2.0'
 group :development, :test do
   gem 'pry-rails'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
   gem 'dotenv-rails'
 end

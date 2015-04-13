@@ -21,9 +21,9 @@ module ApplicationHelper
   end
 
   def character_id_number
-    @character_id_number = "http://gateway.marvel.com:80/v1/public/characters?"\
-    "name=#{@character}&ts=#{timestamp}&apikey="\
-    "#{public_key}&hash=#{hash}"
+    @character_id_number = HTTParty.get("http://gateway.marvel.com:80/v1/"\
+    "public/characters?name=#{@character}&ts=#{timestamp}&apikey="\
+    "#{public_key}&hash=#{hash}")["data"]["results"][0]["id"]
   end
 
   def character_bio
