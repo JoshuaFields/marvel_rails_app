@@ -1,28 +1,8 @@
-== README
+Welcome to my amazing, incredible, and unstoppable Marvel web app. The purpose of this app is to play around with Marvel's API and design a stylish website. Oh yeah, and to have a blast while doing it!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Things to know:
+  - This was built using Ruby on Rails 4.2.1 and Ruby 2.0.0p576
+  - I made ample use of the (excellent) Gumby CSS framework
+  - PostgreSQL is my database of choice
+  - Testing is done with RSpec
+  - **Data provided by Marvel. © 2015 Marvel**
