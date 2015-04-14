@@ -4,16 +4,20 @@ class CharactersController < ApplicationController
     @character = Character.new
   end
 
+  def show
+    unless params[:id] == nil
+      @character = Character.find(params[:id])
+      @character_api = MarvelApi.new(@character)
+    else
+      params[:id] = 1
+      @character = Character.find(params[:id])
+      @character_api = MarvelApi.new(@character)
+    end
+  end
+
+  # possibly take this out. i may not use an index page
   def index
     @characters = Character.all
-    unless params[:heroes] == nil
-      @character = Character.find(params[:heroes]).character_name
-      # @character_id_number = <<-eos
-      # <%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?
-      # name=#{@character}&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")
-      # ["data"]["results"][0]["id"] %>
-      # eos
-    end
   end
 
 end

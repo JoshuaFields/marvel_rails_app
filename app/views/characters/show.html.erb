@@ -1,0 +1,15 @@
+<div class="row main-row">
+  <div class="eleven columns">
+
+    <% unless @character == nil %>
+      <h1><%= @character.character_name %></h1>
+      <h5><%= @character_api.bio %></h5>
+      <br>
+      <%= image_tag(@character_api.character_image) %>
+      <br>
+
+      <h2>Giant JSON</h2>
+      <%= @character_api.get_series %>
+    <% end %>
+  </div>
+</div>
