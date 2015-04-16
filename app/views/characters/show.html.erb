@@ -1,15 +1,23 @@
 <div class="row main-row">
   <div class="eleven columns">
 
-    <% unless @character == nil %>
-      <h1><%= @character.character_name %></h1>
-      <h5><%= @character_api.bio %></h5>
-      <br>
-      <%= image_tag(@character_api.character_image) %>
-      <br>
-
-      <h2>Giant JSON</h2>
-      <%= @character_api.get_series %>
+    <h1><%= @character.character_name %></h1>
+    <h5><%= @character_api.bio %></h5>
+    <br>
+    <%= image_tag(@character_api.character_image) %>
+    <br>
+    <h2>You Need to Read:</h2>
+    <% @character_api.get_series.each do |story| %>
+      <% unless MarvelApi.portrait(story).include?("image_not_available") %>
+        <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'><%= image_tag(MarvelApi.box(story)) %></a>
+      <% else %>
+        <a href="<%= (@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/portrait_uncanny.jpg") %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'><%= image_tag(@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/standard_fantastic.jpg") %></a>
+      <% end %>
     <% end %>
+
+    <h1>Test: Method</h1>
+
+    <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 100, ellipsis: "...") %>
+    <%=  link_to "read more", @character_api.get_wiki %>
   </div>
 </div>

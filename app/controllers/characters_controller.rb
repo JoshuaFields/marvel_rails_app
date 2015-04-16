@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class CharactersController < ApplicationController
 
   def new

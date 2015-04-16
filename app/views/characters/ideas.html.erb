@@ -10,3 +10,10 @@
 
 <!-- gets a series -->
 <%= HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{character_id_number}/series?titleStartsWith=#{@character}&orderBy=startYear&limit=5&ts=#{timestamp}&apikey=#{public_key}&hash=#{hash}")["data"]["results"][0] %>
+
+
+<a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title="<%= MarvelApi.title(story) %>"><%= image_tag(MarvelApi.box(story)) %></a>
+
+<%= link_to image_tag(MarvelApi.box(story)), MarvelApi.get_url(story) %>
+
+<%= MarvelApi.get_url(story) %>

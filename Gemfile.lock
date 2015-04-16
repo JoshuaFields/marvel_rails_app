@@ -69,6 +69,8 @@ GEM
       dotenv (= 2.0.0)
     erubis (2.7.0)
     execjs (2.4.0)
+    fancybox2-rails (0.2.8)
+      railties (>= 3.1.0, < 5.0)
     ffi (1.9.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
@@ -76,6 +78,8 @@ GEM
       jquery-rails
       modernizr-rails
     hike (1.2.3)
+    html_truncator (0.4.1)
+      nokogiri (~> 1.5)
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -197,13 +201,16 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   compass
   dotenv-rails
+  fancybox2-rails (~> 0.2.8)
   gumby-framework
+  html_truncator (~> 0.2)
   httparty
   jbuilder (~> 2.0)
   jquery-rails
   json
   modernizr-rails
   modular-scale
+  nokogiri
   pg
   pry-rails
   rails (= 4.2.1)

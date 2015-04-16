@@ -5,8 +5,10 @@
     Marvel
   </title>
   <%= favicon_link_tag 'favicon.ico' %>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    'application', 'lightbox.css', media: 'all' %>
   <%= javascript_include_tag :modernizr %>
+  <%= javascript_include_tag 'jquery-1.11.0.min.js' %>
+  <%= javascript_include_tag 'lightbox.min.js' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
