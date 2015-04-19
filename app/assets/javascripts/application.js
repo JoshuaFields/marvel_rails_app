@@ -11,21 +11,5 @@
 // about supported directives.
 //
 //= require jquery
-//= require fancybox
 //= require jquery_ujs
-//= require modernizr
-//= require gumby
-//= require gumby.parallax.js
-//= require ui/gumby.fittext
-//= require ui/gumby.navbar
-//= require ui/gumby.checkbox
-//= require ui/gumby.fixed
-//= require ui/gumby.radiobtn
-//= require ui/gumby.retina
-//= require ui/gumby.skiplink
-//= require ui/gumby.tabs
-//= require ui/gumby.toggleswitch
-//= require ui/jquery.validation
-//= require skrollr
-
 //= require_tree .

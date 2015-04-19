@@ -1,56 +1,107 @@
-<div class="row main-row">
-  <div class="eleven columns">
+<section class="pub hide-all show-large show-xlarge xlarge-push-right large-push-right">
+  <div class="column-group gutters">
+    <a href="#" class="all-100 mrec">
+      <img src="../assets/js/holder.js/300x250/ink/auto/text: MREC PUB" />
+    </a>
+    <div class="all-50">
+      <img src="../assets/js/holder.js/300x250/ink/auto/text: PUB" />
+    </div>
+    <div class="all-50">
+      <img src="../assets/js/holder.js/300x250/ink/auto/text: PUB" />
+    </div>
+  </div>
 
-    <h1><%= @character.character_name %></h1>
+  <p>
+    <h1>TEST</h1>
+    Real Name: <%= @character_api.get_identity %>
+    <br>
+    First Appearance: <%= @character_api.get_first_issue %>
+  </p>
 
-    <h3>Real Name</h3>
-    <%= @character_api.get_identity %>
+</section>
 
-    <h3>First Appearance</h3>
-    <%= @character_api.get_first_issue %>
-
-    <% unless @character_api.bio.length < 1 %>
-      <h5><%= @character_api.bio %></h5>
-      <br>
-    <% else %>
-      <h5>
-        <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 100, ellipsis: "...") %>
-        <%=  link_to "read more", @character_api.get_wiki %>
-      </h5>
-      <br>
-    <% end %>
-
-    <section class="tabs">
-
-      <ul class="tab-nav">
-        <li class="active"><a href="#">First Tab</a></li>
-        <li><a href="#">Second Tab</a></li>
-        <li><a href="#">Third Tab</a></li>
-      </ul>
-
-      <div class="tab-content active">
-        <p>Here's the first piece of content</p>
+<section class="highlight">
+  <div class="highlight-wrapper">
+    <div class="column-group gutters">
+      <div class="xlarge-60 large-60 medium-50 small-100 tiny-100">
+        <div class="image">
+          <%= image_tag(@character_api.character_image, :size => "600x430") %>
+        </div>
       </div>
-      <div class="tab-content">
-        <p>My tab is active so I'll show up first! Inb4 tab 3!</p>
+      <div class="xlarge-40 large-40 medium-50 small-100 tiny-100">
+        <h2><%= @character.character_name %></h2>
+          <p>
+            <% unless @character_api.bio.length < 1 %>
+              <%= @character_api.bio %>
+              <br>
+            <% else %>
+                <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 100, ellipsis: "...") %>
+                <%=  link_to "read more", @character_api.get_wiki %>
+              <br>
+            <% end %>
+          </p>
       </div>
-      <div class="tab-content">
-        <p>Don't forget about me! I'm tab 3!</p>
-      </div>
+    </div>
 
-    </section>
+    <!-- top two comics -->
 
-    <h2>You Need to Read:</h2>
-    <% @character_api.get_series.each do |story| %>
-      <% unless MarvelApi.portrait(story).include?("image_not_available") %>
-        <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'><%= image_tag(MarvelApi.box(story)) %></a>
-      <% else %>
-        <a href="<%= (@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/portrait_uncanny.jpg") %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'><%= image_tag(@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/standard_fantastic.jpg") %></a>
+    <div class="column-group gutters">
+      <% @character_api.get_newest.each do |story| %>
+        <% unless MarvelApi.portrait(story).include?("image_not_available") %>
+          <div class="all-50 small-100 tiny-100">
+            <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <figure class="ink-image">
+                <%= image_tag(MarvelApi.landscape(story)) %>
+                <figcaption class="dark small-caption">
+                  <%= MarvelApi.title(story) %>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        <% else %>
+          <div class="all-50 small-100 tiny-100">
+            <a href="<%= (@character_api.alt_series_image(MarvelApi.get_series_id(story)) + "/portrait_uncanny.jpg") %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <figure class="ink-image">
+                <%= image_tag(@character_api.alt_series_image(MarvelApi.get_series_id(story)) + "/landscape_incredible.jpg") %>
+                <figcaption class="dark small-caption">
+                  <%= MarvelApi.title(story) %>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
 
-    <h1>Test: Method</h1>
-    <%= @character_api.get_first_issue %>
+    <!-- bottom three comics -->
+
+    <div class="column-group gutters">
+      <% @character_api.get_series.each do |story| %>
+        <% unless MarvelApi.portrait(story).include?("image_not_available") %>
+          <div class="all-33 small-100 tiny-100">
+            <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <figure class="ink-image">
+                <%= image_tag(MarvelApi.box_xl(story)) %>
+                <figcaption class="dark small-caption">
+                  <%= MarvelApi.title(story) %>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        <% else %>
+          <div class="all-33 small-100 tiny-100">
+            <a href="<%= (@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/portrait_uncanny.jpg") %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <figure class="ink-image">
+                <%= image_tag(@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/standard_xlarge.jpg") %>
+                <figcaption class="dark small-caption">
+                  <%= MarvelApi.title(story) %>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 
   </div>
-</div>
+</section>

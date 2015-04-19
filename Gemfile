@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 
 ## Gumby Stuff ##
-gem 'sass-rails', '~> 5.0'
-gem 'compass'
+gem 'sass-rails'
 gem 'modular-scale'
-gem 'gumby-framework'
 gem 'modernizr-rails'
 
 ## The Essentials ##
@@ -20,8 +18,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'nokogiri'
 gem "html_truncator", "~>0.2"
-gem 'fancybox2-rails', '~> 0.2.8'
-gem 'skrollr-rails'
 
 ## Testing and Development ##
 group :development, :test do

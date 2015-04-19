@@ -1,44 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>
-    Marvel
-  </title>
-  <%= favicon_link_tag 'favicon.ico' %>
-  <%= stylesheet_link_tag    'application', 'lightbox.css', media: 'all' %>
-  <%= stylesheet_link_tag 'gumby.parallax.js' %>
-  <%= javascript_include_tag :modernizr %>
-  <%= javascript_include_tag 'jquery-1.11.0.min.js' %>
-  <%= javascript_include_tag 'lightbox.min.js' %>
-  <%= javascript_include_tag 'gumby.parallax.js' %>
-  <%= javascript_include_tag 'gumby_tab_trigger.js' %>
+  <title>TestSite3</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <%= javascript_include_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="row navbar pretty" id="nav1" gumby-fixed="top">
-    <a class="toggle" gumby-trigger="#nav1 > ul" href="#"><i class="icon-menu"></i></a>
-    <h5 class="four columns logo">
-     <a href="#"> Something</a>
-   </h5>
+  <div class="ink-grid">
+    <header class="vertical-space">
+      <h1>The Hero Vault<small>... and villains too!</small></h1>
+      <nav class="ink-navigation">
+        <ul class="menu horizontal black">
+          <li class="active"><a href="#">item</a></li>
+          <li><a href="#">item</a></li>
+          <li><a href="#">item</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <ul class="eight columns">
-        <li>
-          <%= link_to "Home", characters_path %>
-        </li>
-        <li>
-          <a href="#" class="hero-list">Heroes and Villains</a>
-          <div class="dropdown">
-            <% Character.all.order(:character_name).each do |hero| %>
-              <ul>
-                <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
-              </ul>
-            <% end %>
-          </div>
-        </li>
-      </ul>
+    <%= yield %>
+
+    <%= render 'footer' %>
   </div>
-
-  <%= yield %>
-
 </body>
 </html>
