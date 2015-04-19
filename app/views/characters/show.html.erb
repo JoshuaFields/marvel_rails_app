@@ -2,10 +2,44 @@
   <div class="eleven columns">
 
     <h1><%= @character.character_name %></h1>
-    <h5><%= @character_api.bio %></h5>
-    <br>
-    <%= image_tag(@character_api.character_image) %>
-    <br>
+
+    <h3>Real Name</h3>
+    <%= @character_api.get_identity %>
+
+    <h3>First Appearance</h3>
+    <%= @character_api.get_first_issue %>
+
+    <% unless @character_api.bio.length < 1 %>
+      <h5><%= @character_api.bio %></h5>
+      <br>
+    <% else %>
+      <h5>
+        <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 100, ellipsis: "...") %>
+        <%=  link_to "read more", @character_api.get_wiki %>
+      </h5>
+      <br>
+    <% end %>
+
+    <section class="tabs">
+
+      <ul class="tab-nav">
+        <li class="active"><a href="#">First Tab</a></li>
+        <li><a href="#">Second Tab</a></li>
+        <li><a href="#">Third Tab</a></li>
+      </ul>
+
+      <div class="tab-content active">
+        <p>Here's the first piece of content</p>
+      </div>
+      <div class="tab-content">
+        <p>My tab is active so I'll show up first! Inb4 tab 3!</p>
+      </div>
+      <div class="tab-content">
+        <p>Don't forget about me! I'm tab 3!</p>
+      </div>
+
+    </section>
+
     <h2>You Need to Read:</h2>
     <% @character_api.get_series.each do |story| %>
       <% unless MarvelApi.portrait(story).include?("image_not_available") %>
@@ -16,8 +50,7 @@
     <% end %>
 
     <h1>Test: Method</h1>
+    <%= @character_api.get_first_issue %>
 
-    <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 100, ellipsis: "...") %>
-    <%=  link_to "read more", @character_api.get_wiki %>
   </div>
 </div>

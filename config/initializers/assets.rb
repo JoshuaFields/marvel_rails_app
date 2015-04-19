@@ -12,3 +12,5 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( lightbox.css )
 Rails.application.config.assets.precompile += %w( jquery-1.11.0.min.js )
 Rails.application.config.assets.precompile += %w( lightbox.min.js )
+Rails.application.config.assets.precompile += %w( gumby.parallax.js )
+Rails.application.config.assets.precompile += %w( gumby_tab_trigger.js )

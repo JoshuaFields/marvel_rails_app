@@ -61,19 +61,43 @@ class MarvelApi
   end
 
   def character_image
-    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]["path"].to_s + ".jpg"
+    name_case = @character_name
+    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+    # ["path"] + ".jpg"
+
+    if result == nil
+      name_case = @character_name.downcase
+      result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+    else
+      result["path"] + ".jpg"
+    end
+    result["path"] + ".jpg"
   end
 
   def get_wiki
     HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]
   end
 
+  ## Nokogiri Methods ##
+
   def get_alt_bio
     wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
 
     wiki.at_css('#biobody').content
-    # Nokogiri::HTML.parse(input_string).css('p').first.text
-    # use .content.strip to get rid of html elements
+  end
+
+  def get_identity
+    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
+
+    identity = wiki.css('#powerbox p')[1].content
+    identity.sub("Real Name", "")
+  end
+
+  def get_first_issue
+    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
+
+    identity = wiki.css('#powerbox p')[6].content
+    identity.sub("First Appearance", "")
   end
 
   private
