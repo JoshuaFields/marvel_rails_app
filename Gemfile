@@ -17,6 +17,7 @@ gem 'sass-rails'
 gem 'modular-scale'
 gem 'modernizr-rails'
 gem 'google-webfonts'
+gem 'mechanize'
 
 ## Testing and Development ##
 group :development, :test do

@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'uri'
 
 class CharactersController < ApplicationController
 
@@ -12,7 +13,6 @@ class CharactersController < ApplicationController
       @characters = Character.all
   end
 
-  # possibly take this out. i may not use an index page
   def index
     @characters = Character.all
   end

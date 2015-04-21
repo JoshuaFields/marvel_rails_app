@@ -3,6 +3,7 @@
 <head>
   <title>The Hero Vault</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= google_webfonts_link_tag open_sans_condensed: [300, 700],
                                open_sans: [300, 400] %>
   <%= javascript_include_tag 'application', media: 'all' %>
@@ -22,7 +23,7 @@
               <li>
                 <a href="#">A-C</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_abc.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -33,7 +34,7 @@
               <li>
                 <a href="#">D-F</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_def.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -44,7 +45,7 @@
               <li>
                 <a href="#">G-I</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_ghi.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -55,7 +56,7 @@
               <li>
                 <a href="#">J-L</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_jkl.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -66,7 +67,7 @@
               <li>
                 <a href="#">M-O</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_mno.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -77,7 +78,7 @@
               <li>
                 <a href="#">P-R</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_pqr.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -88,7 +89,7 @@
               <li>
                 <a href="#">S-U</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_stu.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -99,7 +100,7 @@
               <li>
                 <a href="#">V-X</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_vwx.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
@@ -110,10 +111,18 @@
               <li>
                 <a href="#">Y-Z</a>
                 <ul class="submenu">
-                  <% Character.all.order(:character_name).each do |hero| %>
+                  <% Character.sort_yz.each do |hero| %>
                     <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
                   <% end %>
                 </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="https://github.com/JoshuaFields/marvel_rails_app">
+                  <i class="fa fa-github-square fa-lg"></i>
+                </a>
               </li>
             </div>
 

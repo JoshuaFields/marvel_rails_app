@@ -1,4 +1,6 @@
 require 'open-uri'
+require 'uri'
+require 'mechanize'
 
 class MarvelApi
   attr_reader :character, :data
@@ -117,13 +119,26 @@ class MarvelApi
     name_case = @character_name
     result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
 
-    if result == nil
+    if result.nil?
       name_case = @character_name.downcase
       result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
     else
       result["path"] + ".jpg"
     end
     result["path"] + ".jpg"
+  end
+
+  def get_character_image
+    # name_case = @character_name
+    # result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+
+    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+
+    if result.nil?
+      get_alt_character_image
+    else
+      result["path"] + ".jpg"
+    end
   end
 
   def get_wiki
@@ -154,7 +169,7 @@ class MarvelApi
 
     issue = wiki.css('#powerbox p')[6]
     if issue.nil?
-      "Not available"
+      "image_not_available.jpg"
     else
       issue.content.sub("First Appearance", "")
     end
@@ -191,12 +206,26 @@ class MarvelApi
       end
   end
 
-  #possibly take out. not working for everyone
   def get_headshot_image
     wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
 
     pic = wiki.css('#headshot img').to_s
-    pic.sub("thumb/", "")
+    URI.extract(pic).join("")
+  end
+
+  def get_alt_character_image
+    mechanize = Mechanize.new
+    page = mechanize.get(@character.character_wiki_url)
+    link1 = page.link_with(dom_class: 'image')
+    page = link1.click
+
+    link2 = page.link_with(text: "Full resolution")
+    if link2.nil?
+      "nothing found"
+    else
+      page2 = link2.click
+      page2.uri
+    end
   end
 
   private
