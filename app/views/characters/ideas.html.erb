@@ -1,0 +1,3 @@
+<%= form_tag("/characters/", enforce_utf8: false) do %>
+  <%= select_tag(:character_name, options_from_collection_for_select(@characters.order(:character_name), :id, :character_name), selected: :character_name, include_blank: 'Select a Hero/Villain', :onchange => "this.form.submit();") %>
+<% end %>

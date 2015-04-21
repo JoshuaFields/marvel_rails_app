@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TestSite3</title>
+  <title>The Hero Vault</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <%= google_webfonts_link_tag open_sans_condensed: [300, 700],
+                               merriweather: [300, 400] %>
   <%= javascript_include_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="ink-grid">
     <header class="vertical-space">
-      <h1>The Hero Vault<small>... and villains too!</small></h1>
+      <div class="site-title">
+        <h1>The Hero Vault<small>A Marvel Web App by Josh Fields</small></h1>
+      </div>
       <nav class="ink-navigation">
         <ul class="menu horizontal black">
-          <li class="active"><a href="#">item</a></li>
-          <li><a href="#">item</a></li>
-          <li><a href="#">item</a></li>
+          <li class="active">
+            <a href="#">Heroes</a>
+            <ul class="submenu">
+              <% Character.all.order(:character_name).each do |hero| %>
+                <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+              <% end %>
+            </ul>
+          </li>
         </ul>
       </nav>
     </header>

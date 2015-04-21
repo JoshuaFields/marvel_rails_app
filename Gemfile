@@ -1,10 +1,5 @@
 source 'https://rubygems.org'
 
-## Gumby Stuff ##
-gem 'sass-rails'
-gem 'modular-scale'
-gem 'modernizr-rails'
-
 ## The Essentials ##
 gem 'json'
 gem 'awesome_print'
@@ -18,6 +13,10 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'nokogiri'
 gem "html_truncator", "~>0.2"
+gem 'sass-rails'
+gem 'modular-scale'
+gem 'modernizr-rails'
+gem 'google-webfonts'
 
 ## Testing and Development ##
 group :development, :test do

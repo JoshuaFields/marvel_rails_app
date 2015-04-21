@@ -11,12 +11,13 @@
     </div>
   </div>
 
-  <p>
-    <h1>TEST</h1>
-    Real Name: <%= @character_api.get_identity %>
-    <br>
-    First Appearance: <%= @character_api.get_first_issue %>
-  </p>
+  <!-- right column info -->
+  <dl>
+    <dt>Real Name</dt>
+    <dd><%= @character_api.get_identity %></dd>
+    <dt>First Appearance</dt>
+    <dd><%= @character_api.get_first_issue %></dd>
+  </dl>
 
 </section>
 
@@ -29,13 +30,14 @@
         </div>
       </div>
       <div class="xlarge-40 large-40 medium-50 small-100 tiny-100">
-        <h2><%= @character.character_name %></h2>
+        <h1><%= @character.character_name %></h1>
+
           <p>
             <% unless @character_api.bio.length < 1 %>
               <%= @character_api.bio %>
               <br>
             <% else %>
-                <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 100, ellipsis: "...") %>
+                <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 90, ellipsis: "...") %>
                 <%=  link_to "read more", @character_api.get_wiki %>
               <br>
             <% end %>
@@ -49,9 +51,19 @@
       <% @character_api.get_newest.each do |story| %>
         <% unless MarvelApi.portrait(story).include?("image_not_available") %>
           <div class="all-50 small-100 tiny-100">
-            <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+
+            <% unless MarvelApi.landscape(story) == "not found" %>
+              <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+            <% else %>
+              <a href="<%= @character_api.character_image %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+            <% end %>
+
               <figure class="ink-image">
+              <% unless MarvelApi.landscape(story) == "not found" %>
                 <%= image_tag(MarvelApi.landscape(story)) %>
+              <% else %>
+                <%= image_tag((@character_api.character_image).gsub(".jpg", "/landscape_incredible.jpg")) %>
+              <% end %>
                 <figcaption class="dark small-caption">
                   <%= MarvelApi.title(story) %>
                 </figcaption>
@@ -60,13 +72,15 @@
           </div>
         <% else %>
           <div class="all-50 small-100 tiny-100">
-            <a href="<%= (@character_api.alt_series_image(MarvelApi.get_series_id(story)) + "/portrait_uncanny.jpg") %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+            <a href="<%= (@character_api.alt_series_image(MarvelApi.get_series_id(story)) + '/portrait_uncanny.jpg') %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              
               <figure class="ink-image">
                 <%= image_tag(@character_api.alt_series_image(MarvelApi.get_series_id(story)) + "/landscape_incredible.jpg") %>
                 <figcaption class="dark small-caption">
                   <%= MarvelApi.title(story) %>
                 </figcaption>
               </figure>
+
             </a>
           </div>
         <% end %>
@@ -79,15 +93,26 @@
       <% @character_api.get_series.each do |story| %>
         <% unless MarvelApi.portrait(story).include?("image_not_available") %>
           <div class="all-33 small-100 tiny-100">
-            <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+
+            <% unless MarvelApi.box_xl(story) == "not found" %>
+              <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+            <% else %>
+              <a href="<%= @character_api.character_image %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+            <% end %>
+
               <figure class="ink-image">
-                <%= image_tag(MarvelApi.box_xl(story)) %>
+                <% unless MarvelApi.box_xl(story) == "not found" %>
+                  <%= image_tag(MarvelApi.box_xl(story)) %>
+                <% else %>
+                  <%= image_tag(@character_api.character_image) %>
+                <% end %>
                 <figcaption class="dark small-caption">
                   <%= MarvelApi.title(story) %>
                 </figcaption>
               </figure>
             </a>
           </div>
+
         <% else %>
           <div class="all-33 small-100 tiny-100">
             <a href="<%= (@character_api.alt_image(MarvelApi.get_comic_id(story)) + "/portrait_uncanny.jpg") %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>

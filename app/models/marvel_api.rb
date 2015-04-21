@@ -32,7 +32,11 @@ class MarvelApi
   end
 
   def self.box_xl(series)
-    series["thumbnail"]["path"] + "/standard_xlarge.jpg"
+    unless series == nil
+      series["thumbnail"]["path"] + "/standard_xlarge.jpg"
+    else
+      "not found"
+    end
   end
 
   def self.box_fantastic(series)
@@ -40,19 +44,35 @@ class MarvelApi
   end
 
   def self.portrait(series)
-    series["thumbnail"]["path"] + "/portrait_uncanny.jpg"
+    unless series == nil
+      series["thumbnail"]["path"] + "/portrait_uncanny.jpg"
+    else
+      "not found"
+    end
   end
 
   def self.landscape(series)
-    series["thumbnail"]["path"] + "/landscape_incredible.jpg"
+    unless series == nil
+      series["thumbnail"]["path"] + "/landscape_incredible.jpg"
+    else
+      "not found"
+    end
   end
 
   def self.title(series)
-    series["title"]
+    unless series == nil
+      series["title"]
+    else
+      "No comic is available"
+    end
   end
 
   def self.get_url(series)
-    series["urls"][0]["url"]
+    unless series == nil
+      series["urls"][0]["url"]
+    else
+      "#"
+    end
   end
 
   def self.get_comic_id(series)
@@ -130,6 +150,14 @@ class MarvelApi
 
     identity = wiki.css('#powerbox p')[6].content
     identity.sub("First Appearance", "")
+  end
+
+  #possibly take out. not working for everyone
+  def get_headshot_image
+    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
+
+    identity = wiki.css('#headshot img').to_s
+    identity.sub("thumb/", "")
   end
 
   private

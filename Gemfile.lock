@@ -72,6 +72,8 @@ GEM
     ffi (1.9.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    google-webfonts (0.2.0)
+      actionpack (>= 3.0.0)
     html_truncator (0.4.1)
       nokogiri (~> 1.5)
     httparty (0.13.3)
@@ -191,6 +193,7 @@ DEPENDENCIES
   awesome_print
   coffee-rails (~> 4.1.0)
   dotenv-rails
+  google-webfonts
   html_truncator (~> 0.2)
   httparty
   jbuilder (~> 2.0)

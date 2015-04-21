@@ -7,14 +7,9 @@ class CharactersController < ApplicationController
   end
 
   def show
-    unless params[:id] == nil
       @character = Character.find(params[:id])
       @character_api = MarvelApi.new(@character)
-    else
-      params[:id] = 1
-      @character = Character.find(params[:id])
-      @character_api = MarvelApi.new(@character)
-    end
+      @characters = Character.all
   end
 
   # possibly take this out. i may not use an index page
@@ -22,4 +17,7 @@ class CharactersController < ApplicationController
     @characters = Character.all
   end
 
+  def create
+    @character = Character.find(params[:id])
+  end
 end
