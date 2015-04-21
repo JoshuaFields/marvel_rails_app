@@ -6,11 +6,11 @@ body {
 }
 
 a {
-  color: #87003F;
+  color: #A10066;
 }
 
 a:hover {
-  color: black;
+  color: #008A8A;
 }
 
 dt {
@@ -30,6 +30,11 @@ dd {
 
 .small-caption {
   font-size: 0.7em;
+}
+
+.nav-links {
+  font-family: "Open Sans Condensed";
+  font-weight: 700;
 }
 
 header h1 small:before  {

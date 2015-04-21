@@ -141,22 +141,34 @@ class MarvelApi
   def get_identity
     wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
 
-    identity = wiki.css('#powerbox p')[1].content
-    identity.sub("Real Name", "")
+    identity = wiki.css('#powerbox p')[1]
+    if identity.nil?
+      "Not available"
+    else
+      identity.content.sub("Real Name", "")
+    end
   end
 
   def get_first_issue
     wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
 
-    identity = wiki.css('#powerbox p')[6].content
-    identity.sub("First Appearance", "")
+    issue = wiki.css('#powerbox p')[6]
+    if issue.nil?
+      "Not available"
+    else
+      issue.content.sub("First Appearance", "")
+    end
   end
 
   def get_powers
     wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
 
-    powers = wiki.at_css('#char-powers').content
-    powers.sub("Powers", "")
+    powers = wiki.at_css('#char-powers')
+    if powers.nil?
+      "Not available"
+    else
+      powers.content.sub("Powers", "")
+    end
   end
 
   def get_abilities

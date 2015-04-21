@@ -1,15 +1,9 @@
 <section class="pub hide-all show-large show-xlarge xlarge-push-right large-push-right">
-  <div class="column-group gutters">
+  <!-- <div class="column-group gutters">
     <a href="#" class="all-100 mrec">
       <img src="../assets/js/holder.js/300x250/ink/auto/text: MREC PUB" />
     </a>
-    <div class="all-50">
-      <img src="../assets/js/holder.js/300x250/ink/auto/text: PUB" />
-    </div>
-    <div class="all-50">
-      <img src="../assets/js/holder.js/300x250/ink/auto/text: PUB" />
-    </div>
-  </div>
+  </div> -->
 
   <!-- right column info -->
   <dl>
@@ -32,6 +26,7 @@
   </dl>
 
 <%= @character_api.get_character_id %>
+<i class="fa fa-github-alt fa-2x"></i>
 
 </section>
 
@@ -51,8 +46,7 @@
               <%= @character_api.bio %>
               <br>
             <% else %>
-                <%= HTML_Truncator.truncate(@character_api.get_alt_bio, 90, ellipsis: "...") %>
-                <%=  link_to "read more", @character_api.get_wiki %>
+            <%= raw(HTML_Truncator.truncate(@character_api.get_alt_bio, 80, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
               <br>
             <% end %>
           </p>
@@ -87,7 +81,7 @@
         <% else %>
           <div class="all-50 small-100 tiny-100">
             <a href="<%= (@character_api.alt_series_image(MarvelApi.get_series_id(story)) + '/portrait_uncanny.jpg') %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
-              
+
               <figure class="ink-image">
                 <%= image_tag(@character_api.alt_series_image(MarvelApi.get_series_id(story)) + "/landscape_incredible.jpg") %>
                 <figcaption class="dark small-caption">

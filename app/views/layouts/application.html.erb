@@ -16,14 +16,108 @@
       </div>
       <nav class="ink-navigation">
         <ul class="menu horizontal black">
-          <li class="active">
-            <a href="#">Heroes</a>
-            <ul class="submenu">
-              <% Character.all.order(:character_name).each do |hero| %>
-                <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
-              <% end %>
-            </ul>
-          </li>
+          <div class="column-group horizontal-gutters">
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">A-C</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">D-F</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">G-I</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">J-L</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">M-O</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">P-R</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">S-U</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">V-X</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+            <div class="all-10 nav-links">
+              <li>
+                <a href="#">Y-Z</a>
+                <ul class="submenu">
+                  <% Character.all.order(:character_name).each do |hero| %>
+                    <li><a href="/characters/<%= hero.id %>"><%= hero.character_name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </div>
+
+        </div>
         </ul>
       </nav>
     </header>
