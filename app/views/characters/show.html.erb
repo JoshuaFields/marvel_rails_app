@@ -15,9 +15,23 @@
   <dl>
     <dt>Real Name</dt>
     <dd><%= @character_api.get_identity %></dd>
+    <dt>Group Affiliation</dt>
+    <dd>
+      <%= raw(HTML_Truncator.truncate(@character_api.get_group, 40, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
+    </dd>
+    <dt>Powers</dt>
+    <dd>
+      <%= raw(HTML_Truncator.truncate(@character_api.get_powers, 40, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
+    </dd>
+    <dt>Abilities</dt>
+    <dd>
+      <%= raw(HTML_Truncator.truncate(@character_api.get_abilities, 40, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
+    </dd>
     <dt>First Appearance</dt>
     <dd><%= @character_api.get_first_issue %></dd>
   </dl>
+
+<%= @character_api.get_character_id %>
 
 </section>
 

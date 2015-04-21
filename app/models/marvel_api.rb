@@ -152,12 +152,39 @@ class MarvelApi
     identity.sub("First Appearance", "")
   end
 
+  def get_powers
+    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
+
+    powers = wiki.at_css('#char-powers').content
+    powers.sub("Powers", "")
+  end
+
+  def get_abilities
+    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
+      abilities = wiki.at_css('#char-abilities')
+      if abilities.nil?
+        "Not available"
+      else
+        abilities.content.sub("Abilities", "")
+      end
+  end
+
+  def get_group
+    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
+      abilities = wiki.at_css('#char-affiliation')
+      if abilities.nil?
+        "Not available"
+      else
+        abilities.content.sub("Group Affiliation", "")
+      end
+  end
+
   #possibly take out. not working for everyone
   def get_headshot_image
     wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
 
-    identity = wiki.css('#headshot img').to_s
-    identity.sub("thumb/", "")
+    pic = wiki.css('#headshot img').to_s
+    pic.sub("thumb/", "")
   end
 
   private

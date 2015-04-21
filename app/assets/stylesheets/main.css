@@ -1,5 +1,7 @@
 body {
   background: #ededed;
+  font-family: "Open Sans";
+  font-weight: 400;
   /* default font is Roboto */
 }
 
@@ -9,6 +11,16 @@ a {
 
 a:hover {
   color: black;
+}
+
+dt {
+  font-family: "Open Sans Condensed";
+  font-weight: 700;
+}
+
+dd {
+  font-family: "Open Sans";
+  font-weight: 300;
 }
 
 .site-title {
