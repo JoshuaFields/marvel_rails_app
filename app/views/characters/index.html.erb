@@ -1,25 +1,104 @@
-<section class="highlight">
-  <div class="highlight-wrapper">
-    <div class="column-group gutters">
-      <div class="xlarge-60 large-60 medium-50 small-100 tiny-100">
-        <div class="image">
-          <!-- @characters.find(1).index_image -->
-          <%= @characters.find(1).character_name %>
-          <br>
-          <%= @characters.find(1).character_bio %>
-          <br>
+  <div class="column-group">
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
           <%= image_tag(@characters.find(1).character_image_url) %>
-          <br>
-          <%= link_to("Wiki", @characters.find(1).character_wiki_url) %>
-          <br>
-          <%= MarvelApi.new(@characters.find(1)).get_headshot_image %>
-          <br>
-          <%= (MarvelApi.new(@characters.find(4)).get_alt_character_image) %>
-          <br>
-          <br>
-          <%= image_tag("image_not_available.jpg") %>
-        </div>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(1).character_name, character_path(1)) %>
+          </figcaption>
+        </figure>
       </div>
     </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(17).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(17).character_name, character_path(17)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(3).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(3).character_name, character_path(3)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(5).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(5).character_name, character_path(5)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(22).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(22).character_name, character_path(22)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(8).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(8).character_name, character_path(8)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(10).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(10).character_name, character_path(10)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(2).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(2).character_name, character_path(2)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="all-33">
+      <div class="image">
+        <figure class="ink-image index-image-margin">
+          <%= image_tag(@characters.find(20).character_image_url) %>
+          <figcaption class="dark index-captions">
+            <%= link_to(@characters.find(20).character_name, character_path(20)) %>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
   </div>
-</section>
+
+</div>

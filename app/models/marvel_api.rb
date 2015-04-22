@@ -8,7 +8,8 @@ class MarvelApi
   def initialize(character)
     @character = character
     @character_name = character.character_name
-    @character_id = get_character_id
+    # .split(" ").join("%20")
+    @character_id = character.marvel_id
   end
 
   def get_series
@@ -108,34 +109,33 @@ class MarvelApi
   end
 
   def bio
-    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["description"]
+    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["description"]
+
+    if result.nil? || result == ""
+      get_alt_bio
+    else
+      result
+    end
   end
 
   def get_character_id
-    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["id"]
+    sanitized_name = @character_name.split(" ").join("%20")
+    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{sanitized_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["id"]
   end
 
-  def character_image
-    name_case = @character_name
-    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
-
-    if result.nil?
-      name_case = @character_name.downcase
-      result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
-    else
-      result["path"] + ".jpg"
-    end
-    result["path"] + ".jpg"
+  def test_method
+    sanitized_name = @character_name.split(" ").join("%20")
+    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{sanitized_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
   end
 
   def get_character_image
-    # name_case = @character_name
-    # result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{name_case}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+    sanitized_name = @character_name.split(" ").join("%20")
+    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{sanitized_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
 
-    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
-
-    if result.nil?
+    if result.nil? || result == ""
       get_alt_character_image
+    elsif get_alt_character_image.nil?
+      "image_not_found.jpg"
     else
       result["path"] + ".jpg"
     end
@@ -206,13 +206,6 @@ class MarvelApi
       end
   end
 
-  def get_headshot_image
-    wiki = Nokogiri::HTML(open(HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["urls"][1]["url"]))
-
-    pic = wiki.css('#headshot img').to_s
-    URI.extract(pic).join("")
-  end
-
   def get_alt_character_image
     mechanize = Mechanize.new
     page = mechanize.get(@character.character_wiki_url)
@@ -221,7 +214,7 @@ class MarvelApi
 
     link2 = page.link_with(text: "Full resolution")
     if link2.nil?
-      "nothing found"
+      "image_not_found.jpg"
     else
       page2 = link2.click
       page2.uri

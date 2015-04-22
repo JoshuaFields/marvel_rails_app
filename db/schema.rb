@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421190431) do
+ActiveRecord::Schema.define(version: 20150422021326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20150421190431) do
     t.text   "character_bio"
     t.string "character_image_url"
     t.string "character_wiki_url"
+    t.string "marvel_id"
+    t.string "identity"
+    t.string "group"
+    t.text   "powers"
+    t.text   "abilities"
+    t.text   "first_issue"
   end
 
 end

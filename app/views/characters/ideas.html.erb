@@ -2,12 +2,9 @@
   <%= select_tag(:character_name, options_from_collection_for_select(@characters.order(:character_name), :id, :character_name), selected: :character_name, include_blank: 'Select a Hero/Villain', :onchange => "this.form.submit();") %>
 <% end %>
 
-# def retrieve_character_image
-#   unless marvel_api.get_character_image.nil?
-#     @character.character_image_url = marvel_api.character_image
-#     @character.save!
-#   else
-#     @character.character_image_url = marvel_api.get_headshot_image
-#     @character.save!
-#   end
-# end
+<figure class="ink-image">
+  <%= image_tag(@characters.find(1).character_image_url, size: "553x396", class: "index-image-margin") %>
+  <figcaption class="dark">
+    <%= @characters.find(1).character_name %>
+  </figcaption>
+</figure>

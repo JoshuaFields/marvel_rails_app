@@ -3,21 +3,21 @@
   <!-- right column info -->
   <dl>
     <dt>Real Name</dt>
-    <dd><%= @character_api.get_identity %></dd>
+    <dd><%= @character.identity %></dd>
     <dt>Group Affiliation</dt>
     <dd>
-      <%= raw(HTML_Truncator.truncate(@character_api.get_group, 40, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
+      <%= raw(HTML_Truncator.truncate(@character.group, 40, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
     </dd>
     <dt>Powers</dt>
     <dd>
-      <%= raw(HTML_Truncator.truncate(@character_api.get_powers, 40, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
+      <%= raw(HTML_Truncator.truncate(@character.powers, 40, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
     </dd>
     <dt>Abilities</dt>
     <dd>
-      <%= raw(HTML_Truncator.truncate(@character_api.get_abilities, 40, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
+      <%= raw(HTML_Truncator.truncate(@character.abilities, 40, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
     </dd>
     <dt>First Appearance</dt>
-    <dd><%= @character_api.get_first_issue %></dd>
+    <dd><%= @character.first_issue %></dd>
   </dl>
 
 </section>
@@ -27,20 +27,14 @@
     <div class="column-group gutters">
       <div class="xlarge-60 large-60 medium-50 small-100 tiny-100">
         <div class="image">
-          <%= image_tag(@character_api.character_image, :size => "600x430") %>
+          <%= image_tag(@character.character_image_url, size: "600x430") %>
         </div>
       </div>
       <div class="xlarge-40 large-40 medium-50 small-100 tiny-100">
         <h1><%= @character.character_name %></h1>
 
           <p>
-            <% unless @character_api.bio.length < 1 %>
-              <%= @character_api.bio %>
-              <br>
-            <% else %>
-            <%= raw(HTML_Truncator.truncate(@character_api.get_alt_bio, 80, ellipsis: (link_to "... read more", @character_api.get_wiki))) %>
-              <br>
-            <% end %>
+            <%= raw(HTML_Truncator.truncate(@character.character_bio, 90, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
           </p>
       </div>
     </div>
@@ -55,14 +49,14 @@
             <% unless MarvelApi.landscape(story) == "not found" %>
               <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
             <% else %>
-              <a href="<%= @character_api.character_image %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <a href="<%= @character.character_image_url %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
             <% end %>
 
               <figure class="ink-image">
               <% unless MarvelApi.landscape(story) == "not found" %>
                 <%= image_tag(MarvelApi.landscape(story)) %>
               <% else %>
-                <%= image_tag((@character_api.character_image).gsub(".jpg", "/landscape_incredible.jpg")) %>
+                <%= image_tag((@character.character_image_url).gsub(".jpg", "/landscape_incredible.jpg")) %>
               <% end %>
                 <figcaption class="dark small-caption">
                   <%= MarvelApi.title(story) %>
@@ -97,14 +91,14 @@
             <% unless MarvelApi.box_xl(story) == "not found" %>
               <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
             <% else %>
-              <a href="<%= @character_api.character_image %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <a href="<%= @character.character_image_url %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
             <% end %>
 
               <figure class="ink-image">
                 <% unless MarvelApi.box_xl(story) == "not found" %>
                   <%= image_tag(MarvelApi.box_xl(story)) %>
                 <% else %>
-                  <%= image_tag(@character_api.character_image) %>
+                  <%= image_tag(@character.character_image_url) %>
                 <% end %>
                 <figcaption class="dark small-caption">
                   <%= MarvelApi.title(story) %>

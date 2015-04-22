@@ -5,7 +5,8 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= google_webfonts_link_tag open_sans_condensed: [300, 700],
-                               open_sans: [300, 400] %>
+                               open_sans: [300, 400],
+                               marvel: [400, 700] %>
   <%= javascript_include_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
@@ -13,7 +14,7 @@
   <div class="ink-grid">
     <header class="vertical-space">
       <div class="site-title">
-        <h1>The Hero Vault<small>A Marvel Web App by Josh Fields</small></h1>
+        <h1><%= link_to("The Hero Vault", root_path, class: "hero-vault") %><small>A Marvel Web App by Josh Fields</small></h1>
       </div>
       <nav class="ink-navigation">
         <ul class="menu horizontal black">
