@@ -18,7 +18,7 @@ class CharacterLoader
   end
 
   def retrieve_character_image
-    if @character.character_image_url.nil? || @character.character_image_url == "image_not_found.jpg"
+    if @character.character_image_url.nil? || @character.character_image_url == "image_not_available.jpg"
       @character.character_image_url = marvel_api.get_character_image
       @character.save!
     end

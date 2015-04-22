@@ -135,7 +135,7 @@ class MarvelApi
     if result.nil? || result == ""
       get_alt_character_image
     elsif get_alt_character_image.nil?
-      "image_not_found.jpg"
+      "image_not_available.jpg"
     else
       result["path"] + ".jpg"
     end
@@ -214,7 +214,7 @@ class MarvelApi
 
     link2 = page.link_with(text: "Full resolution")
     if link2.nil?
-      "image_not_found.jpg"
+      "image_not_available.jpg"
     else
       page2 = link2.click
       page2.uri
