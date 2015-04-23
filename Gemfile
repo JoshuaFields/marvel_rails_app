@@ -19,6 +19,7 @@ gem 'modular-scale'
 gem 'modernizr-rails'
 gem 'google-webfonts'
 gem 'mechanize'
+gem 'puma'
 
 ## Testing and Development ##
 group :development, :test do

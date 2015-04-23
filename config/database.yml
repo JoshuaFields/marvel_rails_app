@@ -63,3 +63,5 @@ test:
 production:
   <<: *default
   database: marvel_production
+  username: marvel
+  password: <%= ENV['MARVEL_DATABASE_PASSWORD'] %>
