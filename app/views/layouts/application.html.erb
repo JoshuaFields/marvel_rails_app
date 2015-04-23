@@ -8,6 +8,8 @@
                                open_sans: [300, 400],
                                marvel: [400, 700] %>
   <%= javascript_include_tag 'application', media: 'all' %>
+  <!-- Heroku wants this next line for some reason. In development, it will create a phantom lightbox at the bottom of the screen. In production, this line is necessary for the lightbox to even work. Weird!-->
+  <%= javascript_include_tag 'lightbox.min' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
