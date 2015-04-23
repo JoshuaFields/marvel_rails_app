@@ -29,5 +29,5 @@ end
 
 ## Straight up development
 group :development do
-  gem 'rails_12factor'
+    gem 'rails_12factor'
 end
