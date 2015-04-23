@@ -31,8 +31,7 @@
         </div>
       </div>
       <div class="xlarge-40 large-40 medium-50 small-100 tiny-100">
-        <h1><%= @character.character_name %></h1>
-
+        <h1 class="character-name"><%= @character.character_name %></h1>
           <p>
             <%= raw(HTML_Truncator.truncate(@character.character_bio, 90, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
           </p>

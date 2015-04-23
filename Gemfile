@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 ## The Essentials ##
 gem 'json'
@@ -24,4 +25,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'web-console', '~> 2.0'
   gem 'dotenv-rails'
+end
+
+## Straight up development
+group :development do
+  gem 'rails_12factor'
 end

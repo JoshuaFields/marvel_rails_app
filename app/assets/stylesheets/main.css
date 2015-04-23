@@ -10,7 +10,7 @@ a {
 }
 
 a:hover {
-  color: #008A8A;
+  color: #80005a;
 }
 
 dt {
@@ -67,12 +67,18 @@ figure.ink-image > figcaption {
   margin-bottom: 0.75em;
 }
 
+.character-name {
+  font-family: "Marvel";
+  font-weight: 700;
+}
+
 .site-title {
   font-family: "Open Sans Condensed";
   font-weight: 700;
 }
 
 .small-caption {
+  font-family: "Marvel";
   font-size: 0.7em;
 }
 
