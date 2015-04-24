@@ -7,8 +7,7 @@ class MarvelApi
 
   def initialize(character)
     @character = character
-    @character_name = character.character_name
-    # .split(" ").join("%20")
+    @character_name = character.character_name.split(" ").join("%20")
     @character_id = character.marvel_id
   end
 
@@ -16,7 +15,7 @@ class MarvelApi
     count = 0
     series_array = []
     until count == 3
-      series = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{@character_id}/series?titleStartsWith=#{@character.character_name}&orderBy=startYear&limit=3&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][count]
+      series = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{@character_id}/series?titleStartsWith=#{@character_name}&orderBy=startYear&limit=3&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][count]
       series_array << series
       count += 1
     end
@@ -27,7 +26,7 @@ class MarvelApi
     count = 0
     series_array = []
     until count == 2
-      series = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{@character_id}/series?titleStartsWith=#{@character.character_name}&orderBy=-startYear&limit=2&apikey=#{public_key}&ts=#{timestamp}&hash=#{encrypt_request}")["data"]["results"][count]
+      series = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters/#{@character_id}/series?titleStartsWith=#{@character_name}&orderBy=-startYear&limit=2&apikey=#{public_key}&ts=#{timestamp}&hash=#{encrypt_request}")["data"]["results"][count]
       series_array << series
       count += 1
     end
@@ -119,22 +118,23 @@ class MarvelApi
   end
 
   def get_character_id
-    sanitized_name = @character_name.split(" ").join("%20")
-    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{sanitized_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["id"]
+    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["id"]
   end
 
-  def test_method
-    sanitized_name = @character_name.split(" ").join("%20")
-    HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{sanitized_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
-  end
+  # def test_method
+  #   result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+  #
+  #   if result.nil? && get_alt_character_image.nil?
+  #     "image_not_available.jpg"
+  #   else
+  #     result["path"] + ".jpg"
+  #   end
+  # end
 
   def get_character_image
-    sanitized_name = @character_name.split(" ").join("%20")
-    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{sanitized_name}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
+    result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
 
-    if result.nil? || result == ""
-      get_alt_character_image
-    elsif get_alt_character_image.nil?
+    if result.nil? && get_alt_character_image.nil?
       "image_not_available.jpg"
     else
       result["path"] + ".jpg"
@@ -208,13 +208,13 @@ class MarvelApi
 
   def get_alt_character_image
     mechanize = Mechanize.new
-    page = mechanize.get(@character.character_wiki_url)
+    page = mechanize.get(MarvelApi.new(@character).get_wiki)
     link1 = page.link_with(dom_class: 'image')
     page = link1.click
 
     link2 = page.link_with(text: "Full resolution")
     if link2.nil?
-      "image_not_available.jpg"
+      nil
     else
       page2 = link2.click
       page2.uri

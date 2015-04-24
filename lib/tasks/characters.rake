@@ -1,8 +1,8 @@
 desc "Load Characters from Marvel API"
 task :load_characters => :environment do
   Character.find_each do |character|
-    CharacterLoader.new(character).retrieve_character_bio
     CharacterLoader.new(character).retrieve_character_wiki
+    CharacterLoader.new(character).retrieve_character_bio
     CharacterLoader.new(character).retrieve_marvel_character_id
     CharacterLoader.new(character).retrieve_identity
     CharacterLoader.new(character).retrieve_group
