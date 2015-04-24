@@ -20,6 +20,7 @@ gem 'modernizr-rails'
 gem 'google-webfonts'
 gem 'mechanize'
 gem 'puma'
+gem 'will_paginate'
 
 ## Testing and Development ##
 group :development, :test do

@@ -43,6 +43,12 @@ figure a:hover {
   color: #dcdcdc;
 }
 
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 /* .ink-image {
   width: 33%;
   bottom: 1em;
