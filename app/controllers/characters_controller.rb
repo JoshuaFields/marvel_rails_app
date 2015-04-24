@@ -3,10 +3,6 @@ require 'uri'
 
 class CharactersController < ApplicationController
 
-  def new
-    @character = Character.new
-  end
-
   def show
       @character = Character.find(params[:id])
       @character_api = MarvelApi.new(@character)
@@ -14,10 +10,8 @@ class CharactersController < ApplicationController
   end
 
   def index
-    @characters = Character.all
+
+    @characters = Character.paginate(page: params[:page], per_page: 3).order("Random()")
   end
 
-  def create
-    @character = Character.find(params[:id])
-  end
 end

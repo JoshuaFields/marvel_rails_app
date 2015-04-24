@@ -1,0 +1,12 @@
+<div class="all-33">
+  <div class="image">
+    <div class="character">
+      <figure class="ink-image index-image-margin">
+        <%= image_tag(character.character_image_url) %>
+        <figcaption class="dark index-captions">
+          <%= link_to(character.character_name, character_path(character.id)) %>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
