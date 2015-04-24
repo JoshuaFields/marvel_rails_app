@@ -121,16 +121,6 @@ class MarvelApi
     HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["id"]
   end
 
-  # def test_method
-  #   result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
-  #
-  #   if result.nil? && get_alt_character_image.nil?
-  #     "image_not_available.jpg"
-  #   else
-  #     result["path"] + ".jpg"
-  #   end
-  # end
-
   def get_character_image
     result = HTTParty.get("http://gateway.marvel.com:80/v1/public/characters?name=#{@character_name.downcase}&ts=#{timestamp}&apikey=#{public_key}&hash=#{encrypt_request}")["data"]["results"][0]["thumbnail"]
 

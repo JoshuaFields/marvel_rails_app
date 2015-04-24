@@ -5,11 +5,19 @@ body {
   /* default font is Roboto */
 }
 
-a {
+dd.read-more a{
   color: #A10066;
 }
 
-a:hover {
+dd.read-more a:hover {
+  color: #80005a;
+}
+
+p.read-more a{
+  color: #A10066;
+}
+
+p.read-more a:hover {
   color: #80005a;
 }
 
@@ -79,7 +87,7 @@ figure.ink-image > figcaption {
 }
 
 .site-title {
-  font-family: "Open Sans Condensed";
+  font-family: "Marvel";
   font-weight: 700;
 }
 

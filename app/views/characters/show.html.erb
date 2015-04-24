@@ -1,24 +1,26 @@
 <section class="pub hide-all show-large show-xlarge xlarge-push-right large-push-right">
 
   <!-- right column info -->
+  <div>
   <dl>
     <dt>Real Name</dt>
     <dd><%= @character.identity %></dd>
     <dt>Group Affiliation</dt>
-    <dd>
+    <dd class="read-more">
       <%= raw(HTML_Truncator.truncate(@character.group, 40, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
     </dd>
     <dt>Powers</dt>
-    <dd>
+    <dd class="read-more">
       <%= raw(HTML_Truncator.truncate(@character.powers, 40, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
     </dd>
     <dt>Abilities</dt>
-    <dd>
+    <dd class="read-more">
       <%= raw(HTML_Truncator.truncate(@character.abilities, 40, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
     </dd>
     <dt>First Appearance</dt>
     <dd><%= @character.first_issue %></dd>
   </dl>
+  </div>
 
 </section>
 
@@ -32,7 +34,7 @@
       </div>
       <div class="xlarge-40 large-40 medium-50 small-100 tiny-100">
         <h1 class="character-name"><%= @character.character_name %></h1>
-          <p>
+          <p class="read-more">
             <%= raw(HTML_Truncator.truncate(@character.character_bio, 90, ellipsis: (link_to "... read more", @character.character_wiki_url))) %>
           </p>
       </div>
@@ -46,7 +48,7 @@
           <div class="all-50 small-100 tiny-100">
 
             <% unless MarvelApi.landscape(story) == "not found" %>
-              <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
+              <a href="<%= MarvelApi.portrait(story) %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>' class="show-page-links">
             <% else %>
               <a href="<%= @character.character_image_url %>" data-lightbox="series" data-title='<%= link_to MarvelApi.title(story), MarvelApi.get_url(story) %>'>
             <% end %>
