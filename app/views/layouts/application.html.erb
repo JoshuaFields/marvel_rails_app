@@ -2,17 +2,13 @@
 <html>
 <head>
   <title>The Hero Vault</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <%= google_webfonts_link_tag open_sans_condensed: [300, 700],
-                               open_sans: [300, 400],
-                               marvel: [400, 700] %>
-  <%= javascript_include_tag 'application', media: 'all' %>
-  <!-- Heroku wants this next line for some reason. In development, it will create a phantom lightbox at the bottom of the screen. In production, this line is necessary for the lightbox to even work. Weird!-->
-  <%= javascript_include_tag 'lightbox.min' %>
-  <%= javascript_include_tag 'endless_scroll' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" %>
+  <%= google_webfonts_link_tag open_sans_condensed: [300, 700], open_sans: [300, 400], marvel: [400, 700] %>
+  <%= javascript_include_tag 'application', 'lightbox.min', 'endless_scroll' %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <div class="ink-grid">
     <header class="vertical-space">
@@ -130,7 +126,7 @@
               </li>
             </div>
 
-        </div>
+          </div>
         </ul>
       </nav>
     </header>
