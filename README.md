@@ -11,6 +11,6 @@ Things to know:
     - html_truncator for cutting down some of the larger character biographies
     - will_paginate for the pagination used on the index page's endless scrolling feature
 
-![Endless Scrolling!](https://imgur.com/E0IW3zN "Endless scrolling!")
+![Endless Scrolling!](http://i.imgur.com/E0IW3zN.gif "Endless scrolling!")
 
   - **Data provided by Marvel. © 2015 Marvel**
