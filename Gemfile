@@ -21,6 +21,7 @@ gem 'google-webfonts'
 gem 'mechanize'
 gem 'puma'
 gem 'will_paginate'
+gem 'foreman'
 
 ## Testing and Development ##
 group :development, :test do
