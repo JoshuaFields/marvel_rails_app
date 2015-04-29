@@ -10,7 +10,4 @@ Things to know:
     - Nokogiri and mechanize for website scraping (Marvel's API has holes)
     - html_truncator for cutting down some of the larger character biographies
     - will_paginate for the pagination used on the index page's endless scrolling feature
-
-<center>![Endless Scrolling!](http://i.imgur.com/E0IW3zN.gif "Endless scrolling!")</center>
-
   - **Data provided by Marvel. © 2015 Marvel**
